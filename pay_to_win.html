@@ -4,13 +4,26 @@
 
 <body>
   <h1>Pay To Win</h1>
+  {{> button_tmpl}}
 
-  {{> hello}}
+  <h1>Leaderboard</h1>
+  {{> leaderboard}}
 </body>
 
-<template name="hello">
+<template name="button_tmpl">
   <a href="#" class="button">
     <span>Click Me</span>
   </a>
   <p>You have {{counter}} points.</p>
+</template>
+
+<template name="leaderboard">
+  <table>
+  {{#each player}}
+    <tr>
+      <td class="name">{{name}}</td>
+      <td class="score">{{score}}</td>
+    </tr>
+  {{/each}}
+  </table>
 </template>
