@@ -3,14 +3,31 @@
 </head>
 
 <body>
-  <h1>Pay To Win</h1>
+  {{> loginButtons}}
 
-  {{> hello}}
+  <div class="game_area">
+    <h1>Pay To Win</h1>
+    {{> button_tmpl}}
+
+    <h1>Leaderboard</h1>
+    {{> leaderboard}}
+  </div>
 </body>
 
-<template name="hello">
+<template name="button_tmpl">
   <a href="#" class="button">
     <span>Click Me</span>
   </a>
-  <p>You have {{counter}} points.</p>
+  <p>You have {{score}} points.</p>
+</template>
+
+<template name="leaderboard">
+  <table>
+  {{#each player}}
+    <tr>
+      <td class="name">{{username}}</td>
+      <td class="score">{{profile.score}}</td>
+    </tr>
+  {{/each}}
+  </table>
 </template>
