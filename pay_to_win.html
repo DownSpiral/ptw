@@ -23,10 +23,22 @@
 
 <template name="leaderboard">
   <table>
+    <tr>
+      <th class="name">Username</th>
+      <th class="score_all_time">All Time Score</th>
+      <th class="score_year">Score This Year</th>
+      <th class="score_month">Score This Month</th>
+      <th class="score_day">Score This Day</th>
+      <th class="score_hour">Score This Hour</th>
+    </tr>
   {{#each player}}
     <tr>
       <td class="name">{{username}}</td>
-      <td class="score">{{profile.score}}</td>
+      <td class="score_all_time">{{score_all_time}}</td>
+      <td class="score_year">{{score_year}}</td>
+      <td class="score_month">{{score_month}}</td>
+      <td class="score_day">{{score_day}}</td>
+      <td class="score_hour">{{score_hour}}</td>
     </tr>
   {{/each}}
   </table>

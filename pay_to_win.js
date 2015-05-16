@@ -5,7 +5,11 @@ if (Meteor.isClient) {
   Template.button_tmpl.helpers({
     score: function () {
       var user = Meteor.user();
-      return user === null ? Session.get('score') : user.profile.score;
+      if (user == null) {
+        return Session.get('score');
+      } else {
+        return Score.all_time(user);
+      }
     }
   });
 
@@ -13,23 +17,19 @@ if (Meteor.isClient) {
     // increment the counter when button is clicked
     'click .button': function () {
       var user = Meteor.user();
-      if (user === null) {
+      if (user == null) {
         Session.set('score', Session.get('score') + 1);
       } else {
-        Meteor.users.update({
-          _id: Meteor.userId()
-        }, {
-          $set: {'profile.score': user.profile.score + 1 }
-        });
+        Meteor.call('increment_score', user);
       }
     }
   });
 
-  Template.leaderboard.player = function(){
-    return Meteor.users.find({}, {
-      sort: {'profile.score': -1, name: 1}
-    });
-  }
+  Template.leaderboard.helpers({
+    player: function(){
+      return Score.top(25, null);
+    }
+  });
 
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -42,8 +42,6 @@ if (Meteor.isServer) {
   });
 
   Accounts.onCreateUser(function(options, user) {
-    user.profile = {};
-    user.profile.score = 0;
     return user;
   });
 }
