@@ -59,3 +59,32 @@
   -o-transform: translate(0, 4px);
   transform: translate(0, 4px);
 }
+
+.leaderboard {
+  margin: auto;
+  border: 2px solid #f8f8f8;
+  border-collapse: collapse;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+.leaderboard tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.leaderboard tr th {
+  width: 8em;
+  height: 2em;
+  border: 2px solid #f8f8f8;
+  background-color: #cdf;
+}
+
+.leaderboard tr th:first-child {
+  width: 12em;
+}
+
+.leaderboard tr td {
+  height: 1.5em;
+}
