@@ -48,7 +48,7 @@ Score = (function () {
     top : function(length, basis) {
       switch (basis) {
         default:
-          top_scores = ScoreAllTime.find({}, { sort: ["score", "desc"], limit: length }).fetch();
+          top_scores = ScoreAllTime.find({}, { sort: {score: -1}, limit: length }).fetch();
       }
 
       var top_user_ids = _.map(top_scores, function(s) { return s.user_id; })
@@ -71,8 +71,6 @@ Score = (function () {
     },
   };
 })();
-
-
 
 Meteor.methods({
   increment_score: function(user) { return Score.increment(user); },
